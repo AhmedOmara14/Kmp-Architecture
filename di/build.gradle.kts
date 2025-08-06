@@ -9,7 +9,7 @@ kotlin {
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
-        namespace = "com.omaradev.database"
+        namespace = "com.omaradev.di"
         compileSdk = 36
         minSdk = 24
 
@@ -30,7 +30,7 @@ kotlin {
     // A step-by-step guide on how to include this library in an XCode
     // project can be found here:
     // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "databaseKit"
+    val xcfName = "diKit"
 
     iosX64 {
         binaries.framework {
@@ -58,7 +58,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                // Add KMP dependencies here
+                implementation(project(":data:preferences"))
+                api(libs.koin.core)
             }
         }
 
@@ -73,6 +74,9 @@ kotlin {
                 // Add Android-specific dependencies here. Note that this source set depends on
                 // commonMain by default and will correctly pull the Android artifacts of any KMP
                 // dependencies declared in commonMain.
+
+                api(libs.koin.android)
+
             }
         }
 

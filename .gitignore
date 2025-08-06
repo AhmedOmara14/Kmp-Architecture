@@ -1,18 +1,40 @@
+# IntelliJ / Android Studio
 *.iml
-.kotlin
-.gradle
+.idea/
+*.ipr
+*.iws
+
+# Gradle
+.gradle/
 **/build/
-xcuserdata
 !src/**/build/
+
+# Kotlin compiler cache
+.kotlin/
+
+# Local configuration
 local.properties
-.idea
+
+# macOS system files
 .DS_Store
-captures
-.externalNativeBuild
-.cxx
+
+# Captures (Android Studio screenshots, profiler data, etc.)
+captures/
+
+# Native build outputs
+.externalNativeBuild/
+.cxx/
+
+# Xcode
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
 !*.xcodeproj/project.xcworkspace/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
+
+# User-specific Xcode settings
+xcuserdata/
+
+# Misc
+*.log
