@@ -36,6 +36,7 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":di"))
             implementation(project(":data:preferences"))
+            implementation(project(":data:database"))
             implementation(libs.multiplatformSettings)
 
             implementation(compose.runtime)
@@ -48,7 +49,6 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
 
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)

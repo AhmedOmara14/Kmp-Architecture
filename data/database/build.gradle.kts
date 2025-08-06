@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
+    alias(libs.plugins.room)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -58,7 +60,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                // Add KMP dependencies here
+                implementation(libs.room.runtime)
+                implementation(libs.sqlite.bundled)
             }
         }
 
