@@ -34,11 +34,10 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-            implementation(project(":di"))
-            implementation(project(":data:preferences"))
-            implementation(project(":data:database"))
+            implementation(projects.di)
+            implementation(projects.data.preferences)
+            implementation(projects.data.database)
             implementation(libs.multiplatformSettings)
-
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -49,13 +48,10 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
 
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.sqlite.bundled)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             api(libs.koin.core)
 
-            implementation(libs.bundles.ktor)
-            implementation(libs.bundles.coil)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -92,6 +88,6 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
-    implementation(project(":di"))
+    implementation(projects.di)
 }
 

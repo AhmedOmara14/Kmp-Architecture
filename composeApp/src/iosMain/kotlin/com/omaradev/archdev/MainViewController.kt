@@ -6,7 +6,7 @@ import com.omaradev.di.initKoin
 
 fun MainViewController() = ComposeUIViewController(
     configure = {
-        initKoin()
+     //   initKoin()
     }
 ) {
     App()

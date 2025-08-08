@@ -5,7 +5,6 @@ import com.russhwolf.settings.Settings
 import platform.Foundation.NSUserDefaults
 
 class IosPreferences(settingDelete: NSUserDefaults) : IPreferences {
-
     val settings: Settings = NSUserDefaultsSettings(settingDelete)
 
     override fun saveInt(key: String, value: Int) {
