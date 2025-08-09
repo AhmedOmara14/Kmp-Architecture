@@ -11,8 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.omaradev.preferences.IPreferences
-import org.koin.compose.koinInject
+import com.omaradev.core_domain.model.User
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -23,10 +22,9 @@ fun App() {
 @Composable
 fun Content(viewModel: HomeViewModel = koinViewModel()) {
     val token = remember { mutableStateOf("") }
-    val count = remember { mutableStateOf(1) }
 
-    LaunchedEffect(viewModel.token) {
-        token.value = viewModel.token ?: ""
+    LaunchedEffect(viewModel.userName) {
+        token.value = viewModel.userName
     }
 
     Column(
@@ -35,12 +33,15 @@ fun Content(viewModel: HomeViewModel = koinViewModel()) {
         verticalArrangement = Arrangement.Center
     ) {
         Button(onClick = {
-            count.value++
-            viewModel.saveToken("Token count: ${count.value}")
+            viewModel.saveUser(
+                User(
+                    name = "Ahmed",
+                )
+            )
         }) {
-            Text("Save Token")
+            Text("Save User")
         }
-        Text("Current Token: ${token.value}")
+        Text("Current User: ${token.value}")
     }
 
 }

@@ -4,21 +4,23 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.omaradev.database.dao.TodoDao
-import com.omaradev.database.dao.UserDao
-import com.omaradev.preferences.IPreferences
+import androidx.lifecycle.viewModelScope
+import com.omaradev.auth_domain.repository.UserRepository
+import com.omaradev.core_domain.model.User
+import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    val preferences: IPreferences,
-    val userDao: UserDao,
-    val dao: TodoDao
+    val userRepository: UserRepository
 ) : ViewModel() {
 
-    var token by mutableStateOf(preferences.getString("auth_token"))
+    var userName by mutableStateOf("")
         private set
 
-    fun saveToken(newToken: String) {
-        preferences.saveString("auth_token", newToken)
+    fun saveUser(user: User) {
+        viewModelScope.launch {
+            userRepository.saveUserData(user, password = "123")
+            userName = userRepository.getUserByName("Ahmed").id.toString()
+        }
     }
 
 }

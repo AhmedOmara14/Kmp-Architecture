@@ -37,6 +37,8 @@ kotlin {
             implementation(projects.di)
             implementation(projects.data.preferences)
             implementation(projects.data.database)
+            implementation(projects.feature.auth.authDomain)
+            implementation(projects.feature.auth.authDi)
             implementation(libs.multiplatformSettings)
             implementation(compose.runtime)
             implementation(compose.foundation)
