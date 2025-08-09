@@ -8,6 +8,12 @@ fun initKoin(config: KoinAppDeclaration? = null) {
     println("Starting Koin...")
     startKoin {
         config?.invoke(this)
-        modules(sharedModules,platformPreferencesModule(),platformDatabaseModule(),platformAuthenticationModule())
+        modules(
+            sharedModules,
+            platformPreferencesModule(),
+            platformDatabaseModule(),
+            platformAuthenticationModule(),
+            platformUserAuthenticationModule()
+        )
     }
 }

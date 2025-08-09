@@ -31,7 +31,7 @@ dependencyResolutionManagement {
 include(":composeApp")
 include(":data:database")
 include(":data:preferences")
-include(":di")
+include(":core:core-di")
 include(":feature:auth:auth-ui")
 include(":feature:auth:auth-data")
 include(":feature:auth:auth-domain")

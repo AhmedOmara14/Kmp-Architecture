@@ -61,7 +61,7 @@ kotlin {
             dependencies {
                 implementation(libs.kotlin.stdlib)
                 implementation(projects.feature.auth.authDomain)
-                implementation(projects.di)
+                implementation(projects.core.coreDi)
                 implementation(projects.data.database)
                 implementation(projects.core.coreData)
                 implementation(projects.core.coreDomain)

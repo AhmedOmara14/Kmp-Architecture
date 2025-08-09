@@ -34,7 +34,8 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-            implementation(projects.di)
+            implementation(projects.core.coreDi)
+            implementation(projects.core.coreDomain)
             implementation(projects.data.preferences)
             implementation(projects.data.database)
             implementation(projects.feature.auth.authDomain)
@@ -90,6 +91,6 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
-    implementation(projects.di)
+    implementation(projects.core.coreDi)
 }
 

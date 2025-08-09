@@ -59,7 +59,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(projects.di)
+                implementation(projects.core.coreDi)
                 implementation(projects.data.database)
                 implementation(projects.feature.auth.authDomain)
                 implementation(projects.feature.auth.authData)

@@ -1,4 +1,4 @@
-package com.omaradev.core_data
+package com.omaradev.core_data.mapper
 
 import com.benasher44.uuid.uuidFrom
 import com.omaradev.core_domain.model.User

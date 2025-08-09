@@ -35,7 +35,7 @@ fun Content(viewModel: HomeViewModel = koinViewModel()) {
         Button(onClick = {
             viewModel.saveUser(
                 User(
-                    name = "Ahmed",
+                    name = "mo",
                 )
             )
         }) {

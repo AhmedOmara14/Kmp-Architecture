@@ -58,7 +58,10 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(project(":data:preferences"))
+                implementation(projects.data.preferences)
+                implementation(projects.data.database)
+                implementation(projects.core.coreData)
+                implementation(projects.core.coreDomain)
                 api(libs.koin.core)
             }
         }
