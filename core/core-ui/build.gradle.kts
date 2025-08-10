@@ -12,7 +12,7 @@ kotlin {
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
-        namespace = "com.omaradev.auth"
+        namespace = "com.omaradev.core_ui"
         compileSdk = 36
         minSdk = 24
 
@@ -33,7 +33,7 @@ kotlin {
     // A step-by-step guide on how to include this library in an XCode
     // project can be found here:
     // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "authKit"
+    val xcfName = "core:core-uiKit"
 
     iosX64 {
         binaries.framework {
@@ -53,6 +53,7 @@ kotlin {
         }
     }
 
+
     // Source set declarations.
     // Declaring a target automatically creates a source set with the same name. By default, the
     // Kotlin Gradle Plugin creates additional source sets that depend on each other, since it is
@@ -62,11 +63,12 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
-                implementation(projects.feature.auth.authDomain)
+
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
                 implementation(compose.components.resources)
+
             }
         }
 
@@ -93,13 +95,15 @@ kotlin {
 
         iosMain {
             dependencies {
-                // Add iOS-specific dependencies here. This a source set created by Kotlin Gradle
-                // Plugin (KGP) that each specific iOS target (e.g., iosX64) depends on as
-                // part of KMP’s default source set hierarchy. Note that this source set depends
-                // on common by default and will correctly pull the iOS artifacts of any
-                // KMP dependencies declared in commonMain.
+
             }
         }
     }
 
+}
+
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "com.omaradev.core_ui.resources"
+    generateResClass = auto
 }

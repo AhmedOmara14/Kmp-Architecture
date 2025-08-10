@@ -36,6 +36,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.coreDi)
             implementation(projects.core.coreDomain)
+            implementation(projects.core.coreUi)
             implementation(projects.data.preferences)
             implementation(projects.data.database)
             implementation(projects.feature.auth.authDomain)

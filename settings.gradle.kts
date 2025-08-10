@@ -10,8 +10,10 @@ pluginManagement {
                 includeGroupAndSubgroups("com.google")
             }
         }
+        google()
         mavenCentral()
         gradlePluginPortal()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
@@ -39,3 +41,4 @@ include(":feature:auth:auth-di")
 include(":core:core-domain")
 include(":core:core-data")
 include(":core:core-data")
+include(":core:core-ui")
