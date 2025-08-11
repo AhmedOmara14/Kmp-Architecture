@@ -22,24 +22,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.omaradev.core_ui.theme.ColorGrayDark
-import com.omaradev.core_ui.theme.ColorGrayMedium
-import com.omaradev.core_ui.theme.ColorPrimary
-import com.omaradev.core_ui.theme.Transparent
 import com.omaradev.core_ui.ErrorView
 import com.omaradev.core_ui.resources.Res
 import com.omaradev.core_ui.resources.font_medium
 import com.omaradev.core_ui.resources.font_semi_bold
+import com.omaradev.core_ui.theme.ColorGrayDark
+import com.omaradev.core_ui.theme.ColorGrayMedium
+import com.omaradev.core_ui.theme.ColorPrimary
+import com.omaradev.core_ui.theme.Transparent
 import com.omaradev.core_ui.theme.appTypography
 import org.jetbrains.compose.resources.Font
-import org.jetbrains.compose.resources.StringResource
 
 @Composable
 fun AppTextInput(
@@ -48,7 +46,7 @@ fun AppTextInput(
     placeholder: String? = null,
     defaultValue: String? = null,
     onValueChange: (value: String) -> Unit,
-    errorStringResId: StringResource? = null,
+    errorString: String? = null,
     imeAction: ImeAction = ImeAction.Next,
     keyboardType: KeyboardType = KeyboardType.Text,
     maxLength: Int = Int.MAX_VALUE,
@@ -120,11 +118,11 @@ fun AppTextInput(
         }
 
         AnimatedVisibility(
-            visible = errorStringResId != null,
+            visible = errorString != null,
         ) {
             ErrorView(
                 modifier = Modifier.padding(horizontal = 2.dp),
-                errorId = errorStringResId,
+                errorId = errorString,
                 isError = true
             )
         }

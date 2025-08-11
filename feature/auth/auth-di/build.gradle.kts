@@ -60,9 +60,11 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.core.coreDi)
-                implementation(projects.data.database)
+                implementation(projects.feature.auth.authUi)
                 implementation(projects.feature.auth.authDomain)
                 implementation(projects.feature.auth.authData)
+
+                implementation(projects.data.database)
                 implementation(libs.kotlin.stdlib)
                 // Add KMP dependencies here
             }

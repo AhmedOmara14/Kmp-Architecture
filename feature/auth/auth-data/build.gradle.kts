@@ -59,12 +59,13 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(libs.kotlin.stdlib)
                 implementation(projects.feature.auth.authDomain)
                 implementation(projects.core.coreDi)
                 implementation(projects.data.database)
                 implementation(projects.core.coreData)
                 implementation(projects.core.coreDomain)
+
+                implementation(libs.kotlin.stdlib)
                 // Add KMP dependencies here
             }
         }

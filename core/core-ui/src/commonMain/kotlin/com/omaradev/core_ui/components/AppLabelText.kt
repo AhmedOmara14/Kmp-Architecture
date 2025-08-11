@@ -6,8 +6,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.omaradev.core_ui.theme.AppTypography
 import com.omaradev.core_ui.theme.ColorPrimary
+import com.omaradev.core_ui.theme.appTypography
 
 @Composable
 fun AppLabelText(
@@ -22,7 +22,7 @@ fun AppLabelText(
         text = text,
         textAlign = textAlign,
         color = color,
-        style = AppTypography.labelLarge,
+        style = appTypography().labelLarge,
         fontWeight = fontWeight
     )
 }

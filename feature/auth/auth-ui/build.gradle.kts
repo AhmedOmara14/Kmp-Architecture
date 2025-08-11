@@ -12,9 +12,10 @@ kotlin {
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
-        namespace = "com.omaradev.auth"
+        namespace = "com.omaradev.auth_ui"
         compileSdk = 36
         minSdk = 24
+        experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
 
         withHostTestBuilder {
         }
@@ -61,12 +62,21 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(libs.kotlin.stdlib)
                 implementation(projects.feature.auth.authDomain)
+                implementation(projects.core.coreUi)
+                implementation(projects.core.coreDi)
+                implementation(projects.core.coreDomain)
+
+                implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
                 implementation(compose.components.resources)
+
+                //Koin
+                implementation(libs.koin.compose)
+                implementation(libs.koin.compose.viewmodel)
+                implementation(libs.koin.core)
             }
         }
 
@@ -101,5 +111,10 @@ kotlin {
             }
         }
     }
+}
 
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "com.omaradev.auth_ui.resources"
+    generateResClass = auto
 }

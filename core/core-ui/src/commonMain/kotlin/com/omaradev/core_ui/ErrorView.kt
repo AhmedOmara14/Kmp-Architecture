@@ -26,13 +26,11 @@ import com.omaradev.core_ui.resources.Res
 import com.omaradev.core_ui.resources.ic_info_red
 import com.omaradev.core_ui.theme.ColorErrorRed
 import com.omaradev.core_ui.theme.InfoBgColor
-import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ErrorView(
-    errorId: StringResource?,
+    errorId: String?,
     isError: Boolean,
     modifier: Modifier = Modifier
 ) {
@@ -73,7 +71,7 @@ fun ErrorView(
 
             Text(
                 modifier = Modifier.padding(start = 4.dp),
-                text = errorId?.let { stringResource(it) } ?: "",
+                text = errorId ?: "",
                 style = TextStyle(
                     color = ColorErrorRed,
                     fontSize = 12.sp

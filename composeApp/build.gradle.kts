@@ -39,8 +39,8 @@ kotlin {
             implementation(projects.core.coreUi)
             implementation(projects.data.preferences)
             implementation(projects.data.database)
-            implementation(projects.feature.auth.authDomain)
             implementation(projects.feature.auth.authDi)
+            implementation(projects.feature.auth.authUi)
             implementation(libs.multiplatformSettings)
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -54,7 +54,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
-            api(libs.koin.core)
+            implementation(libs.koin.core)
 
         }
         commonTest.dependencies {
