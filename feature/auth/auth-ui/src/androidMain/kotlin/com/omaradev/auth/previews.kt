@@ -10,8 +10,11 @@ import com.omaradev.auth_ui.login.LoginUiState
 private fun LoginScreenPreview() {
     LoginScreenContent(
         uiState = LoginUiState(
-            username = "william.henry.harrison@example-pet-store.com",
+            username = "omara_dev@example.com",
             password = "123456"
-        )
+        ),
+        onEmailChange = {},
+        onPasswordChange = {},
+        onLogin = {}
     )
 }
