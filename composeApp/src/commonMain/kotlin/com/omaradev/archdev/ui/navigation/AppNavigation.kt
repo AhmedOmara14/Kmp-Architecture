@@ -15,6 +15,9 @@ fun AppNavigation() {
             LoginScreen(
                 onSignUp = {
                     navController.navigate(Register)
+                },
+                goToHomePage = {
+                   // navController.navigate(Home)
                 }
             )
         }
@@ -22,6 +25,9 @@ fun AppNavigation() {
             RegisterScreen(
                 navigateUp = {
                     navController.navigateUp()
+                },
+                goToHomePage = {
+                   // navController.navigate(Home)
                 }
             )
         }
