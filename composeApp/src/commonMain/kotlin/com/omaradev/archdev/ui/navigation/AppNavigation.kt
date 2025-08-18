@@ -19,8 +19,11 @@ fun AppNavigation() {
             )
         }
         composable<Register> {
-            RegisterScreen()
+            RegisterScreen(
+                navigateUp = {
+                    navController.navigateUp()
+                }
+            )
         }
-
     }
 }

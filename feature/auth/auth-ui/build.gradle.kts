@@ -77,6 +77,8 @@ kotlin {
                 implementation(libs.koin.compose)
                 implementation(libs.koin.compose.viewmodel)
                 implementation(libs.koin.core)
+
+                implementation(libs.material.icons.extended)
             }
         }
 

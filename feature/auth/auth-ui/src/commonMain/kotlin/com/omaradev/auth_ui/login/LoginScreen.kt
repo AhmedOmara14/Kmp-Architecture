@@ -15,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -82,7 +83,8 @@ fun LoginScreenContent(
         AppTextInput(
             defaultValue = uiState.password,
             hint = stringResource(Res.string.password),
-            onValueChange = onPasswordChange
+            onValueChange = onPasswordChange,
+            keyboardType = KeyboardType.NumberPassword
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -109,7 +111,7 @@ fun LoginScreenContent(
 
         Text(
             text = stringResource(Res.string.don_t_have_an_account),
-            modifier = Modifier.fillMaxWidth().clickable(onClick = {
+            modifier = Modifier.clickable(onClick = {
                 onSignUp()
             }),
             textAlign = TextAlign.Center,
