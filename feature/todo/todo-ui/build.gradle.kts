@@ -12,7 +12,7 @@ kotlin {
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
-        namespace = "com.omaradev.auth_ui"
+        namespace = "com.omaradev.todo_ui"
         compileSdk = 36
         minSdk = 24
         experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
@@ -62,9 +62,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(projects.feature.auth.authDomain)
-                implementation(projects.feature.todo.todoUi)
-
+                implementation(projects.feature.todo.todoDomain)
                 implementation(projects.core.coreUi)
                 implementation(projects.core.coreDi)
                 implementation(projects.core.coreDomain)
@@ -81,6 +79,11 @@ kotlin {
                 implementation(libs.koin.core)
 
                 implementation(libs.material.icons.extended)
+
+                implementation(libs.constraintlayout.compose.multiplatform)
+                implementation(libs.constraintlayout.compose.multiplatform.v060shadedcore)
+                implementation(libs.constraintlayout.compose.multiplatform.v060shaded)
+
             }
         }
 
@@ -94,8 +97,6 @@ kotlin {
             dependencies {
                 implementation(compose.preview)
                 implementation(compose.uiTooling)
-                implementation(libs.compose.ui.tooling.preview)
-                implementation(libs.compose.ui.tooling)
             }
         }
 
@@ -119,10 +120,8 @@ kotlin {
     }
 }
 
-
-
 compose.resources {
     publicResClass = false
-    packageOfResClass = "com.omaradev.auth_ui.resources"
+    packageOfResClass = "com.omaradev.todo_ui.resources"
     generateResClass = auto
 }

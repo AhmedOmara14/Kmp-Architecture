@@ -5,10 +5,14 @@ android-minSdk = "24"
 android-targetSdk = "35"
 androidx-activityCompose = "1.9.3"
 androidx-lifecycle = "2.8.3"
+constraintlayoutCompose = "1.1.1"
+constraintlayoutComposeMultiplatform = "0.6.0"
+constraintlayoutComposeMultiplatformVersion = "0.6.0-shaded-core"
 kotlin = "2.2.0"
 kotlinSerialization = "1.7.3"
 koin = "4.0.0"
 composeMultiplatform = "1.8.2"
+compose = "1.9.0"
 materialIconsExtended = "1.7.8"
 materialIconsExtendedVersion = "1.7.3"
 multiplatformSettings = "1.3.0"
@@ -21,10 +25,15 @@ kotlinStdlibVersion = "2.2.0"
 runner = "1.7.0"
 core = "1.7.0"
 junit = "1.3.0"
+techConstraintlayoutComposeMultiplatform = "0.6.0-shaded"
 uuid = "0.8.4"
 
 
 [libraries]
+androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
+constraintlayout-compose-multiplatform = { module = "tech.annexflow.compose:constraintlayout-compose-multiplatform", version.ref = "constraintlayoutComposeMultiplatform" }
+constraintlayout-compose-multiplatform-v060shaded = { module = "tech.annexflow.compose:constraintlayout-compose-multiplatform", version.ref = "techConstraintlayoutComposeMultiplatform" }
+constraintlayout-compose-multiplatform-v060shadedcore = { module = "tech.annexflow.compose:constraintlayout-compose-multiplatform", version.ref = "constraintlayoutComposeMultiplatformVersion" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
@@ -48,6 +57,9 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 uuid = { module = "com.benasher44:uuid", version.ref = "uuid" }
+
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

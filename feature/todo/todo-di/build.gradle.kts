@@ -2,8 +2,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.androidLint)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
 }
 
 kotlin {
@@ -12,10 +10,9 @@ kotlin {
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
-        namespace = "com.omaradev.auth_ui"
+        namespace = "com.omaradev.todo_di"
         compileSdk = 36
         minSdk = 24
-        experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
 
         withHostTestBuilder {
         }
@@ -34,7 +31,7 @@ kotlin {
     // A step-by-step guide on how to include this library in an XCode
     // project can be found here:
     // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "authKit"
+    val xcfName = "auth-diKit"
 
     iosX64 {
         binaries.framework {
@@ -62,25 +59,14 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(projects.feature.auth.authDomain)
-                implementation(projects.feature.todo.todoUi)
-
-                implementation(projects.core.coreUi)
                 implementation(projects.core.coreDi)
-                implementation(projects.core.coreDomain)
+                implementation(projects.feature.todo.todoUi)
+                implementation(projects.feature.todo.todoDomain)
+                implementation(projects.feature.todo.todoData)
 
+                implementation(projects.data.database)
                 implementation(libs.kotlin.stdlib)
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.material3)
-                implementation(compose.components.resources)
-
-                //Koin
-                implementation(libs.koin.compose)
-                implementation(libs.koin.compose.viewmodel)
-                implementation(libs.koin.core)
-
-                implementation(libs.material.icons.extended)
+                // Add KMP dependencies here
             }
         }
 
@@ -92,10 +78,9 @@ kotlin {
 
         androidMain {
             dependencies {
-                implementation(compose.preview)
-                implementation(compose.uiTooling)
-                implementation(libs.compose.ui.tooling.preview)
-                implementation(libs.compose.ui.tooling)
+                // Add Android-specific dependencies here. Note that this source set depends on
+                // commonMain by default and will correctly pull the Android artifacts of any KMP
+                // dependencies declared in commonMain.
             }
         }
 
@@ -117,12 +102,5 @@ kotlin {
             }
         }
     }
-}
 
-
-
-compose.resources {
-    publicResClass = false
-    packageOfResClass = "com.omaradev.auth_ui.resources"
-    generateResClass = auto
 }

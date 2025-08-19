@@ -40,8 +40,13 @@ kotlin {
             implementation(projects.core.coreUi)
             implementation(projects.data.preferences)
             implementation(projects.data.database)
+            
             implementation(projects.feature.auth.authDi)
             implementation(projects.feature.auth.authUi)
+
+            implementation(projects.feature.todo.todoUi)
+            implementation(projects.feature.todo.todoDi)
+
             implementation(libs.multiplatformSettings)
             implementation(compose.runtime)
             implementation(compose.foundation)
