@@ -62,8 +62,6 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.core)
 
-            implementation(libs.navigation.compose)
-
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

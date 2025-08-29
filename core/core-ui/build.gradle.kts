@@ -71,6 +71,9 @@ kotlin {
                 implementation(compose.material3)
                 implementation(compose.components.resources)
 
+                api(libs.voyager.navigator)
+                api(libs.voyager.screenmodel)
+                api(libs.voyager.koin)
             }
         }
 
