@@ -41,7 +41,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
-object LoginScreen : Screen {
+class LoginScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
@@ -53,7 +53,7 @@ object LoginScreen : Screen {
                 loginNavigator.navigateToRegister()
             },
             goToHomePage = {
-                authNav.navigateToHome()
+                navigator.push(authNav.navigateToHome())
             }
         )
     }

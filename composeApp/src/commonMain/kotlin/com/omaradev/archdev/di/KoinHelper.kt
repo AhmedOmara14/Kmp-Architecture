@@ -14,7 +14,8 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             platformPreferencesModule(),
             platformDatabaseModule(),
             platformAuthenticationModule(),
-            platformUserAuthenticationModule()
+            platformUserAuthenticationModule(),
+            appNavigationModule
         )
     }
 }

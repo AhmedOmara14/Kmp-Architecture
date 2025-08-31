@@ -1,6 +1,7 @@
 package com.omaradev.todo_ui.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,8 +19,13 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import cafe.adriel.voyager.navigator.internal.BackHandler
 import com.omaradev.core_ui.components.AppLabelText
 import com.omaradev.core_ui.theme.ColorPrimary
 import com.omaradev.core_ui.theme.WhiteColor
@@ -29,13 +35,20 @@ import com.omaradev.todo_ui.resources.Res
 import com.omaradev.todo_ui.resources.add_new_task
 import org.jetbrains.compose.resources.stringResource
 
-@Composable
-fun HomeScreen() {
-    HomeScreenContent()
+
+class HomeScreen : Screen {
+    @Composable
+    override fun Content() {
+        HomeScreenContent()
+    }
 }
 
+
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun HomeScreenContent() {
+    val navigator = LocalNavigator.currentOrThrow
+
     Column(
         modifier = Modifier.fillMaxSize().padding(WindowInsets.statusBars.asPaddingValues())
     ) {
@@ -45,7 +58,9 @@ fun HomeScreenContent() {
                 .padding(16.dp)
                 .background(
                     color = ColorPrimary, shape = RoundedCornerShape(32.dp)
-                )
+                ).clickable{
+                    navigator.pop()
+                }
         ) {
             Row(
                 modifier = Modifier.background(ColorPrimary)

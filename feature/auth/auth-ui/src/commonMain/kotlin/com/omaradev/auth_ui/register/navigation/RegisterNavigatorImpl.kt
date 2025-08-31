@@ -5,7 +5,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import com.omaradev.auth_ui.login.LoginScreen
 
 class RegisterNavigatorImpl(private val navigator: Navigator) : RegisterNavigator {
-    override fun navigateToLogin(): Screen {
+    override fun navigateToLogin() {
         navigator.push(LoginScreen())
     }
 }

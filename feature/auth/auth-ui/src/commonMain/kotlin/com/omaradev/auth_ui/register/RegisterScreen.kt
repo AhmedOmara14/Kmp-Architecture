@@ -58,7 +58,7 @@ object RegisterScreen : Screen {
                 navigator.pop()
             },
             goToHomePage = {
-                authNav.navigateToHome()
+                navigator.push(authNav.navigateToHome())
             },
             goToLoginPage = {
                 registerNavigator.navigateToLogin()

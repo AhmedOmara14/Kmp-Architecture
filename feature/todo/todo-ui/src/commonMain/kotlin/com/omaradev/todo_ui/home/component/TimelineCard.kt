@@ -43,7 +43,7 @@ fun TimelineCard(
         if (ifFirst) {
             Box(
                 modifier = Modifier
-                    .size(24.dp)
+                    .size(14.dp)
                     .background(Color.White, CircleShape)
                     .border(2.dp, Color.Red, CircleShape)
                     .constrainAs(dot) {
@@ -54,7 +54,7 @@ fun TimelineCard(
                 Box(
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .size(18.dp)
+                        .size(10.dp)
                         .padding(2.dp)
                         .background(Color.Red, CircleShape)
                 )
