@@ -81,6 +81,10 @@ kotlin {
                 implementation(libs.koin.core)
 
                 implementation(libs.material.icons.extended)
+
+                implementation(libs.voyager.navigator)
+                implementation(libs.voyager.screenmodel)
+                implementation(libs.voyager.koin)
             }
         }
 

@@ -14,12 +14,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.omaradev.auth_ui.login.navigation.LoginNavigatorImpl
+import com.omaradev.auth_ui.navigation.AuthNavigation
 import com.omaradev.auth_ui.resources.Res
 import com.omaradev.auth_ui.resources.don_t_have_an_account
 import com.omaradev.auth_ui.resources.login
@@ -32,8 +38,26 @@ import com.omaradev.core_ui.components.AppTextInput
 import com.omaradev.core_ui.theme.ColorPrimary
 import com.omaradev.core_ui.theme.appTypography
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
+object LoginScreen : Screen {
+    @Composable
+    override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
+        val loginNavigator = remember { LoginNavigatorImpl(navigator) }
+        val authNav: AuthNavigation = koinInject()
+
+        LoginScreen(
+            onSignUp = {
+                loginNavigator.navigateToRegister()
+            },
+            goToHomePage = {
+                authNav.navigateToHome()
+            }
+        )
+    }
+}
 @Composable
 fun LoginScreen(viewModel: LoginViewModel = koinViewModel(), onSignUp: () -> Unit = {}, goToHomePage: () -> Unit) {
     val state by viewModel.uiState.collectAsState()

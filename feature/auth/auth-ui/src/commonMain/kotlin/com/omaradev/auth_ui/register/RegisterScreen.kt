@@ -19,16 +19,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.omaradev.auth_ui.navigation.AuthNavigation
+import com.omaradev.auth_ui.register.navigation.RegisterNavigatorImpl
 import com.omaradev.auth_ui.resources.Res
 import com.omaradev.auth_ui.resources.already_have_an_account
 import com.omaradev.auth_ui.resources.confirm_password
-import com.omaradev.auth_ui.resources.login
 import com.omaradev.auth_ui.resources.name
 import com.omaradev.auth_ui.resources.password
 import com.omaradev.auth_ui.resources.sign_up
@@ -38,13 +43,36 @@ import com.omaradev.core_ui.components.AppTextInput
 import com.omaradev.core_ui.theme.ColorPrimary
 import com.omaradev.core_ui.theme.appTypography
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
+
+object RegisterScreen : Screen {
+    @Composable
+    override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
+        val registerNavigator = remember { RegisterNavigatorImpl(navigator) }
+        val authNav: AuthNavigation = koinInject()
+
+        RegisterScreen(
+            navigateUp = {
+                navigator.pop()
+            },
+            goToHomePage = {
+                authNav.navigateToHome()
+            },
+            goToLoginPage = {
+                registerNavigator.navigateToLogin()
+            }
+        )
+    }
+}
 
 @Composable
 fun RegisterScreen(
     registerViewModel: RegisterViewModel = koinViewModel(),
     navigateUp: () -> Unit,
-    goToHomePage: () -> Unit
+    goToHomePage: () -> Unit,
+    goToLoginPage: () -> Unit
 ) {
     val state = registerViewModel.uiState.collectAsState()
 
@@ -59,7 +87,7 @@ fun RegisterScreen(
         onPasswordChange = registerViewModel::onPasswordChanged,
         onConfirmPasswordChange = registerViewModel::onConfirmPassword,
         onSignUp = registerViewModel::register,
-        onSignIn = navigateUp,
+        onSignIn = goToLoginPage,
         onBackPressure = navigateUp
     )
 }
