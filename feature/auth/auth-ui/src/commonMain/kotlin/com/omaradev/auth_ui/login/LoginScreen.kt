@@ -53,7 +53,7 @@ class LoginScreen : Screen {
                 loginNavigator.navigateToRegister()
             },
             goToHomePage = {
-                navigator.push(authNav.navigateToHome())
+                authNav.navigateToHome()?.let { navigator.push(it) }
             }
         )
     }

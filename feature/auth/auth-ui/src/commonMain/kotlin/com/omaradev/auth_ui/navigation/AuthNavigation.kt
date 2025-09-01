@@ -4,5 +4,5 @@ import cafe.adriel.voyager.core.screen.Screen
 
 interface AuthNavigation {
     fun login(): Screen
-    fun navigateToHome(): Screen
+    fun navigateToHome(): Screen?
 }

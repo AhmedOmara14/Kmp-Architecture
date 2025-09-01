@@ -8,13 +8,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -27,59 +30,86 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.internal.BackHandler
 import com.omaradev.core_ui.components.AppLabelText
+import com.omaradev.core_ui.theme.Black
 import com.omaradev.core_ui.theme.ColorPrimary
 import com.omaradev.core_ui.theme.WhiteColor
 import com.omaradev.todo_domain.models.TimelineItem
 import com.omaradev.todo_ui.home.component.TimelineCard
+import com.omaradev.todo_ui.home.navigation.TodoNavigation
 import com.omaradev.todo_ui.resources.Res
 import com.omaradev.todo_ui.resources.add_new_task
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 
 
-class HomeScreen : Screen {
+class HomeScreen(
+    val logout: () -> Unit
+) : Screen {
     @Composable
     override fun Content() {
-        HomeScreenContent()
+        HomeScreenContent(
+            logout = logout
+        )
     }
 }
 
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun HomeScreenContent() {
+fun HomeScreenContent(logout: () -> Unit) {
     val navigator = LocalNavigator.currentOrThrow
 
     Column(
         modifier = Modifier.fillMaxSize().padding(WindowInsets.statusBars.asPaddingValues())
     ) {
-        Card(
-            modifier = Modifier
-                .align(Alignment.End)
-                .padding(16.dp)
-                .background(
-                    color = ColorPrimary, shape = RoundedCornerShape(32.dp)
-                ).clickable{
-                    navigator.pop()
-                }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Row(
-                modifier = Modifier.background(ColorPrimary)
-                    .padding(horizontal = 24.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = null,
-                    tint = WhiteColor
-                )
-                AppLabelText(
-                    text = stringResource(Res.string.add_new_task),
-                    color = WhiteColor,
-                    modifier = Modifier.padding(start = 8.dp)
-                )
+            Card(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .background(
+                        color = ColorPrimary, shape = RoundedCornerShape(32.dp)
+                    ).clickable {
+                        navigator.pop()
+                    }
+            )
+            {
+                Row(
+                    modifier = Modifier.background(ColorPrimary)
+                        .padding(horizontal = 24.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = null,
+                        tint = WhiteColor
+                    )
+                    AppLabelText(
+                        text = stringResource(Res.string.add_new_task),
+                        color = WhiteColor,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
+                }
             }
+
+            Icon(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .clickable {
+                        logout()
+                    },
+                imageVector = Icons.AutoMirrored.Filled.Logout,
+                contentDescription = null,
+                tint = Black
+            )
+
+
         }
+
 
         val items = listOf(
             TimelineItem(

@@ -15,8 +15,12 @@ fun App(authViewModel: AuthViewModel = koinInject()) {
     val state by authViewModel.authState.collectAsState()
 
     when (state) {
-        AuthState.LoggedIn -> Navigator(HomeScreen())
-        AuthState.LoggedOut -> Navigator(LoginScreen()) 
+        AuthState.LoggedIn -> Navigator(HomeScreen(
+            logout = {
+                authViewModel.logout()
+            }
+        ))
+        AuthState.LoggedOut -> Navigator(LoginScreen())
         else -> {}
     }
 }
