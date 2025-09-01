@@ -1,4 +1,5 @@
 # Kmp-Architecture Project Architecture
+<img width="400" height="600" alt="image" src="https://github.com/user-attachments/assets/a1dc162c-06e4-4a65-8027-4c9c84803398" />
 
 This document outlines the architecture of the Kmp-Architecture project. The project follows a modular, layered architecture designed for scalability and maintainability, leveraging Kotlin Multiplatform (KMP) to share code across different platforms like Android and iOS.
 
@@ -68,53 +69,3 @@ Each feature of the application is encapsulated within its own set of modules. F
 ## Conceptual Module Dependency Scheme
 
 This diagram illustrates the typical dependencies between the different layers and module types. Note that this is a conceptual representation; actual dependencies are defined in the `build.gradle.kts` files.
-
-'''mermaid
-graph TD;
-App_composeApp["composeApp (Application)"]
-
-    subgraph "Feature Modules (e.g., Auth)"
-        direction LR
-        F_UI["Feature UI (auth-ui)"]
-        F_Domain["Feature Domain (auth-domain)"]
-        F_Data["Feature Data (auth-data)"]
-        F_DI["Feature DI (auth-di)"]
-    end
-
-    subgraph "Core Modules"
-        direction LR
-        C_UI["core-ui"]
-        C_Domain["core-domain"]
-        C_Data["core-data"]
-        C_DI["core-di"]
-    end
-
-    subgraph "Data Sources"
-        direction LR
-        DS_DB["Database (data-database)"]
-        DS_Prefs["Preferences (data-preferences)"]
-        DS_Network["Network (data-network, if present)"]
-    end
-
-    App_composeApp --> F_UI;
-    App_composeApp --> F_DI;
-    App_composeApp --> C_DI;
-
-    F_UI --> F_Domain;
-
-F_UI --> C_UI; // Optional: if feature UI uses core UI components
-
-    F_DI --> F_Domain;
-    F_DI --> F_Data;
-    F_DI --> C_DI; // For shared dependencies
-
-    F_Domain --> C_Domain; // For base classes/models
-
-    F_Data --> F_Domain; // Implements interfaces from Feature Domain
-    F_Data --> C_Data;   // For base data logic/utils
-    F_Data --> DS_DB;
-    F_Data --> DS_Prefs;
-    F_Data --> DS_Network;
-
-'''
-This architecture promotes a decoupled, testable, and maintainable codebase suitable for KMP development.
