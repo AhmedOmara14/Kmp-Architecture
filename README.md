@@ -56,7 +56,7 @@ Each feature of the application is encapsulated within its own set of modules. F
 *   **Gradle Kotlin DSL (`build.gradle.kts`):** Build scripts are written in Kotlin.
 *   **Version Catalogs (e.g., `libs.versions.toml`):** Likely used for managing dependency versions centrally.
 
-## Data Flow (Typical)
+## Data Flow
 
 1.  **UI (Platform-Specific):** User interacts with the UI (e.g., a Composable in `auth-ui`).
 2.  **ViewModel/Presenter (Platform-Specific):** UI event triggers a function in the ViewModel (e.g., in `auth-ui`).
@@ -66,6 +66,3 @@ Each feature of the application is encapsulated within its own set of modules. F
 6.  **Data Source (commonMain or Platform-Specific):** Repository implementation fetches/stores data from/to a local database, network API, or other data sources.
 7.  Data flows back up the chain to the UI for display.
 
-## Conceptual Module Dependency Scheme
-
-This diagram illustrates the typical dependencies between the different layers and module types. Note that this is a conceptual representation; actual dependencies are defined in the `build.gradle.kts` files.
