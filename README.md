@@ -1,5 +1,7 @@
 # Kmp-Architecture Project Architecture
 <img width="400" height="600" alt="image" src="https://github.com/user-attachments/assets/a1dc162c-06e4-4a65-8027-4c9c84803398" />
+<img width="2232" height="1758" alt="image" src="https://github.com/user-attachments/assets/751b82ec-cd3d-4617-b349-8757ddab4c5d" />
+
 
 This document outlines the architecture of the Kmp-Architecture project. The project follows a modular, layered architecture designed for scalability and maintainability, leveraging Kotlin Multiplatform (KMP) to share code across different platforms like Android and iOS.
 
