@@ -12,6 +12,7 @@ class LoginUseCase(
         val existingUserPassword = userRepository.getUserPasswordByName(name = username)
 
         return if (existingUserPassword == password && user?.name == username) {
+            userRepository.setLoggedInUser(user)
             LoginResult.SUCCESS
         } else {
             LoginResult.FAILURE

@@ -15,6 +15,7 @@ class RegisterUseCase(
             return RegistrationResult.USER_ALREADY_REGISTERED
         }?:run {
             userRepository.saveUserData(User(username), password)
+            userRepository.setLoggedInUser(User(username))
             return RegistrationResult.SUCCESS
         }
     }

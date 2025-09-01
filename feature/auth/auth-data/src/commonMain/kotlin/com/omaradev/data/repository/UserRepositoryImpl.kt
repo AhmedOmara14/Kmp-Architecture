@@ -12,7 +12,7 @@ class UserRepositoryImpl(
         user: User,
         password: String
     ) {
-        userDao.insert(Mapper.toDatabase(user, password))
+        userDao.insert(Mapper.toDatabase(user, password, isLoggedIn = true))
     }
 
     override suspend fun getUserByName(name: String): User? {
@@ -25,6 +25,19 @@ class UserRepositoryImpl(
 
     override suspend fun getUserPasswordByName(name: String): String? {
         return userDao.getUserByName(name = name)?.pass
+    }
+
+    override suspend fun getLoggedInUser(): User? {
+        return userDao.getLoggedInUser()?.let { Mapper.fromDatabase(userEntity = it) }
+    }
+
+    override suspend fun setLoggedInUser(user: User) {
+        userDao.clearLoggedInUser()
+        userDao.setLoggedInUser(user.id.value.toString())
+    }
+
+    override suspend fun clearLoggedInUser() {
+        userDao.clearLoggedInUser()
     }
 
 }

@@ -10,4 +10,10 @@ interface UserRepository {
     suspend fun getUserById(id: String): User?
 
     suspend fun getUserPasswordByName(name: String): String?
+
+    suspend fun getLoggedInUser(): User?
+
+    suspend fun setLoggedInUser(user: User)
+
+    suspend fun clearLoggedInUser()
 }

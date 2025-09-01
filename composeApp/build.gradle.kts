@@ -43,6 +43,7 @@ kotlin {
             
             implementation(projects.feature.auth.authDi)
             implementation(projects.feature.auth.authUi)
+            implementation(projects.feature.auth.authDomain)
 
             implementation(projects.feature.todo.todoUi)
             implementation(projects.feature.todo.todoDi)

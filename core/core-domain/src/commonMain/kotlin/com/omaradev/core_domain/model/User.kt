@@ -5,7 +5,8 @@ import com.benasher44.uuid.uuid4
 
 data class User(
     val name: String,
-    val id: UserId = UserId(uuid4())
+    val id: UserId = UserId(uuid4()),
+    val isLoggedIn: Boolean = false
 )
 
 

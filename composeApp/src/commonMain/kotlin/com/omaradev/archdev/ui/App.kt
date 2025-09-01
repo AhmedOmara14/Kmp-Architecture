@@ -1,12 +1,22 @@
 package com.omaradev.archdev.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.navigator.Navigator
-import com.omaradev.auth_ui.navigation.AuthNavigation
+import com.omaradev.archdev.ui.viewmodel.AuthState
+import com.omaradev.archdev.ui.viewmodel.AuthViewModel
+import com.omaradev.auth_ui.login.LoginScreen
+import com.omaradev.todo_ui.home.HomeScreen
 import org.koin.compose.koinInject
 
 @Composable
-fun App() {
-    val authNav: AuthNavigation = koinInject()
-    Navigator(authNav.login())
+fun App(authViewModel: AuthViewModel = koinInject()) {
+    val state by authViewModel.authState.collectAsState()
+
+    when (state) {
+        AuthState.LoggedIn -> Navigator(HomeScreen())
+        AuthState.LoggedOut -> Navigator(LoginScreen()) 
+        else -> {}
+    }
 }

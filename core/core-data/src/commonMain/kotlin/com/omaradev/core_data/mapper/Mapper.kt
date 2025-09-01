@@ -6,18 +6,20 @@ import com.omaradev.core_domain.model.UserId
 import com.omaradev.database.entity.UserEntity
 
 object Mapper {
-    fun toDatabase(user: User, password: String): UserEntity {
+    fun toDatabase(user: User, password: String, isLoggedIn: Boolean): UserEntity {
         return UserEntity(
             name = user.name,
             pass = password,
-            id = user.id.value.toString()
+            id = user.id.value.toString(),
+            isLoggedIn = isLoggedIn
         )
     }
 
     fun fromDatabase(userEntity: UserEntity): User {
         return User(
             name = userEntity.name,
-            id = UserId(uuidFrom(userEntity.id))
+            id = UserId(uuidFrom(userEntity.id)),
+            isLoggedIn = userEntity.isLoggedIn
         )
     }
 }
