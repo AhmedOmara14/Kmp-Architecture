@@ -13,7 +13,6 @@ import org.koin.compose.koinInject
 @Composable
 fun App(authViewModel: AuthViewModel = koinInject()) {
     val state by authViewModel.authState.collectAsState()
-
     when (state) {
         AuthState.LoggedIn -> Navigator(HomeScreen(
             logout = {

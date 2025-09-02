@@ -6,11 +6,11 @@ import com.omaradev.core_domain.model.User
 import com.omaradev.database.dao.UserDao
 
 class UserRepositoryImpl(
-    private val userDao: UserDao
+    private val userDao: UserDao,
 ) : UserRepository {
+
     override suspend fun saveUserData(
-        user: User,
-        password: String
+        user: User, password: String
     ) {
         userDao.insert(Mapper.toDatabase(user, password, isLoggedIn = true))
     }

@@ -10,7 +10,7 @@ import com.omaradev.database.entity.TodoEntity
 import com.omaradev.database.entity.UserEntity
 
 @Database(
-    version = 3,
+    version = 4,
     entities = [
         UserEntity::class,
         TodoEntity::class

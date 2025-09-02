@@ -59,8 +59,11 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(libs.kotlin.stdlib)
-                // Add KMP dependencies here
+                implementation(projects.feature.todo.todoDomain)
+                implementation(projects.core.coreDi)
+                implementation(projects.data.database)
+                implementation(projects.core.coreData)
+                implementation(projects.core.coreDomain)
             }
         }
 

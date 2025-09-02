@@ -25,11 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.omaradev.todo_domain.models.TimelineItem
+import com.omaradev.todo_domain.models.Task
 
 @Composable
 fun TimelineCard(
-    item: TimelineItem,
+    item: Task,
     isLast: Boolean,
     ifFirst: Boolean
 ) {

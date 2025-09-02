@@ -53,17 +53,13 @@ object RegisterScreen : Screen {
         val registerNavigator = remember { RegisterNavigatorImpl(navigator) }
         val authNav: AuthNavigation = koinInject()
 
-        RegisterScreen(
-            navigateUp = {
-                navigator.pop()
-            },
-            goToHomePage = {
-                authNav.navigateToHome()?.let { navigator.push(it) }
-            },
-            goToLoginPage = {
-                registerNavigator.navigateToLogin()
-            }
-        )
+        RegisterScreen(navigateUp = {
+            navigator.pop()
+        }, goToHomePage = {
+            authNav.navigateToHome()?.let { navigator.push(it) }
+        }, goToLoginPage = {
+            registerNavigator.navigateToLogin()
+        })
     }
 }
 
@@ -77,8 +73,7 @@ fun RegisterScreen(
     val state = registerViewModel.uiState.collectAsState()
 
     LaunchedEffect(state.value) {
-        if (state.value.isLoggedIn)
-            goToHomePage()
+        if (state.value.isLoggedIn) goToHomePage()
     }
 
     RegisterScreenContent(

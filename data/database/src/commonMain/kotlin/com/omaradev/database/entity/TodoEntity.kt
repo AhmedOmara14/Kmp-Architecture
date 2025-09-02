@@ -7,6 +7,8 @@ import androidx.room.PrimaryKey
 data class TodoEntity(
     @PrimaryKey val id: String,
     val userId: String,
-    val text: String,
-    val completed: Boolean
+    val title: String,
+    val time: String,
+    val description: String,
+    val backgroundColorResource: Long
 )

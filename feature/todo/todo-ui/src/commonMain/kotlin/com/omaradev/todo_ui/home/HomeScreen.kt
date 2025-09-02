@@ -17,10 +17,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -28,18 +33,20 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import cafe.adriel.voyager.navigator.internal.BackHandler
 import com.omaradev.core_ui.components.AppLabelText
 import com.omaradev.core_ui.theme.Black
 import com.omaradev.core_ui.theme.ColorPrimary
 import com.omaradev.core_ui.theme.WhiteColor
-import com.omaradev.todo_domain.models.TimelineItem
+import com.omaradev.todo_domain.models.Task
+import com.omaradev.todo_ui.home.component.TaskDialog
 import com.omaradev.todo_ui.home.component.TimelineCard
-import com.omaradev.todo_ui.home.navigation.TodoNavigation
+import com.omaradev.todo_ui.home.component.format_time.currentTimeMillis
+import com.omaradev.todo_ui.home.component.format_time.formatTime
+import com.omaradev.todo_ui.home.viewmodel.HomeViewModel
 import com.omaradev.todo_ui.resources.Res
 import com.omaradev.todo_ui.resources.add_new_task
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 
 class HomeScreen(
@@ -53,15 +60,25 @@ class HomeScreen(
     }
 }
 
-
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun HomeScreenContent(logout: () -> Unit) {
+fun HomeScreenContent(
+    logout: () -> Unit,
+    homeViewModel: HomeViewModel = koinViewModel(),
+) {
     val navigator = LocalNavigator.currentOrThrow
 
+    var showDialog by remember { mutableStateOf(false) }
+    var tasks by remember { mutableStateOf<List<Task>>(emptyList()) }
+    val uiState by homeViewModel.uiState.collectAsState()
+
+
     Column(
-        modifier = Modifier.fillMaxSize().padding(WindowInsets.statusBars.asPaddingValues())
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(WindowInsets.statusBars.asPaddingValues())
     ) {
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -72,13 +89,14 @@ fun HomeScreenContent(logout: () -> Unit) {
                     .padding(16.dp)
                     .background(
                         color = ColorPrimary, shape = RoundedCornerShape(32.dp)
-                    ).clickable {
-                        navigator.pop()
+                    )
+                    .clickable {
+                        showDialog = true
                     }
-            )
-            {
+            ) {
                 Row(
-                    modifier = Modifier.background(ColorPrimary)
+                    modifier = Modifier
+                        .background(ColorPrimary)
                         .padding(horizontal = 24.dp, vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
@@ -99,59 +117,32 @@ fun HomeScreenContent(logout: () -> Unit) {
             Icon(
                 modifier = Modifier
                     .padding(16.dp)
-                    .clickable {
-                        logout()
-                    },
+                    .clickable { logout() },
                 imageVector = Icons.AutoMirrored.Filled.Logout,
                 contentDescription = null,
                 tint = Black
             )
-
-
         }
 
-
-        val items = listOf(
-            TimelineItem(
-                "Wireframing",
-                "12:00 PM",
-                "Make some ideation from sketch and wireframes.",
-                0xFFFF6B6B
-            ),
-            TimelineItem(
-                "UI Design",
-                "1:30 PM",
-                "Visual design from the wireframe and make design system.",
-                0xFFB5C7FF
-            ),
-            TimelineItem(
-                "Prototyping",
-                "3:00 PM",
-                "Make the interactive prototype for the testing & stakeholders.",
-                0xFFFFE29D
-            ),
-            TimelineItem(
-                "Usability Testing",
-                "3:45 PM",
-                "Primary user testing and usability testing of the prototype.",
-                0xFFC6F6D5
-            ),
-            TimelineItem(
-                "Meeting",
-                "4:30 PM",
-                "Sum up discussion for the new product with stakeholders.",
-                0xFFFECACA
-            )
-        )
-
         LazyColumn {
-            itemsIndexed(items) { index, item ->
+            itemsIndexed(uiState.tasks) { index, item ->
                 TimelineCard(
                     item = item,
                     ifFirst = index == 0,
-                    isLast = index == items.lastIndex,
+                    isLast = index == uiState.tasks.lastIndex
                 )
             }
         }
+    }
+
+    if (showDialog) {
+        TaskDialog(
+            onDismiss = { showDialog = false },
+            onSave = { newTask ->
+                homeViewModel.saveTask(newTask.apply {
+                    time = formatTime(currentTimeMillis())
+                })
+            }
+        )
     }
 }

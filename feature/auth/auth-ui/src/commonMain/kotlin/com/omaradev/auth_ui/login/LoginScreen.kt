@@ -58,11 +58,16 @@ class LoginScreen : Screen {
         )
     }
 }
+
 @Composable
-fun LoginScreen(viewModel: LoginViewModel = koinViewModel(), onSignUp: () -> Unit = {}, goToHomePage: () -> Unit) {
+fun LoginScreen(
+    viewModel: LoginViewModel = koinViewModel(),
+    onSignUp: () -> Unit = {},
+    goToHomePage: () -> Unit
+) {
     val state by viewModel.uiState.collectAsState()
 
-    LaunchedEffect(state.isLoggedIn){
+    LaunchedEffect(state.isLoggedIn) {
         if (state.isLoggedIn) {
             goToHomePage()
         }
@@ -141,9 +146,10 @@ fun LoginScreenContent(
 
         Text(
             text = stringResource(Res.string.don_t_have_an_account),
-            modifier = Modifier.clickable(onClick = {
-                onSignUp()
-            }),
+            modifier = Modifier.clickable(
+                onClick = {
+                    onSignUp()
+                }),
             textAlign = TextAlign.Center,
             color = ColorPrimary,
             style = appTypography().bodySmall,
